@@ -1,0 +1,14 @@
+;(load "Desktop/scheme_script/Chapter_1/46.scm")
+
+(define (iterative-improve good-enough? improve)
+  (lambda (x)
+    (if (good-enough? x)
+	x
+	((iterative-improve good-enough? improve) (impove x)))))
+
+;sqrt of 1.1.7
+
+
+
+;fixed-point of 1.3.3
+

@@ -1,0 +1,8 @@
+(load "Desktop/scheme_scripts/Chapter_2/2.scm")
+
+(define (make-segment a b)
+  (cons a b))
+(define (start-segment x)
+  (car x))
+(define (end-segment x)
+  (crd x))

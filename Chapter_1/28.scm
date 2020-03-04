@@ -1,0 +1,53 @@
+					;Miller-Rabin test
+
+;(load "Desktop/scheme_script/Chapter_1/28.scm")
+
+(define (even? n)
+  (= 0 (remainder n 2)))
+
+(define (square n)
+  (* n n))
+
+;return 0 if val is a non-trivial root of m else  val^2 mod m 
+(define (remainder-square-check val m)
+  (cond ((= (remainder val m) 1) 1)
+	((= (remainder val m) (- m 1)) 1)
+	((= (remainder (square val) m) 1) 0)
+	(else (remainder (square val) m))))
+
+(define (expmod_nt base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder-square-check (expmod_nt base (/ exp 2) m) m))
+        (else
+         (remainder 
+          (* base (expmod_nt base (- exp 1) m))
+          m))))
+
+;pick a random a < n (random n)
+;raise a to the (n-1)-st power mod n
+
+(define (big-rand n)
+  (if (< n 3)
+      (random n)
+      (+ (random (- n 2)) 2)))
+
+(define (M-R-test n tries)
+  (define (MR-iter n tries a)
+    (cond ((= tries 0) #t)
+	  ((= (expmod_nt a (- n 1) n) 1) (MR-iter n (- tries 1) (big-rand n)))
+	  (else #f)))
+  (cond ((< n 2) #f)
+	((< n 4) #t)
+	((= (remainder n 2) 0) #f)
+	(else (MR-iter n tries (big-rand n)))))
+
+
+
+
+
+
+
+
+
+

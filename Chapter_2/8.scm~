@@ -1,0 +1,5 @@
+; (load "Desktop/scheme_script/Chapter_2/8.scm")
+(load "Desktop/scheme_script/Chapter_2/7.scm")
+;mul-interval add-interval div-interval make-interval print
+
+
