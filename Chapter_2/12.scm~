@@ -18,4 +18,3 @@
 
 (define (percent i)
   (/ (center i) (width i)))
-

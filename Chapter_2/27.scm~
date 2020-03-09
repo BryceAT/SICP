@@ -1,0 +1,26 @@
+#|
+(load "Desktop/scheme_script/Chapter_2/27.scm")
+|#
+
+(define (reverse l)
+  (define (iter rev tail)
+    (if (null? rev)
+	tail
+	(iter (cdr rev) (cons (car rev) tail))))
+  (iter l (list)))
+
+(define (for-each f l)
+  (if (pair? l)
+      (f (car l)))
+  (if (pair? l)
+      (for-each f (cdr l))))
+  
+
+(define (deep-reverse tree)
+  (define (iter t)
+    (if (pair? tree)
+	(for-each deep-reverse (reverse tree))
+	tree)))
+  
+
+;(display (deep-reverse (list 1 2 3)))

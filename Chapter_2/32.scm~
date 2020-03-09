@@ -1,0 +1,12 @@
+#|
+(load "Desktop/scheme_script/Chapter_2/32.scm")
+|#
+
+(define (subsets s)
+  (if (null? s)
+      (list ())
+      (let ((rest (subsets (cdr s))))
+        (append rest (map (car s) rest)))))
+
+(newline)
+(display (subsets (list 1 2 3)))

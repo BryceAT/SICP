@@ -1,0 +1,17 @@
+#|
+(load "Desktop/scheme_script/Chapter_2/17.scm")
+Define a procedure last-pair that returns the list that contains on lyt he last element of a given (nonempty) list
+|#
+
+(define (last-pair l)
+  (if (null? l)
+      #f
+      (let ((first (car l))
+	    (last (cdr l))
+	    (if (null? last)
+		first
+		(last-pair last))))))
+
+(last-pair (list 23 72 149 34))
+
+

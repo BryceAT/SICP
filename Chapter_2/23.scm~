@@ -1,0 +1,13 @@
+#|
+(load "Desktop/scheme_script/Chapter_2/23.scm")
+|#
+
+(define (for-each proc l)
+  (define (iter remaining)
+    (if (null? remaining)
+	(newline)
+	((proc (car remaining))
+	 (iter (cdr remaining))))))
+(for-each 
+ (lambda (x) (newline) (display x))
+ (list 57 321 88))

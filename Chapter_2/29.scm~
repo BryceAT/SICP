@@ -1,0 +1,42 @@
+#|
+(load "Desktop/scheme_script/Chapter_2/29.scm")
+Write the corresponding selectors left-branch and right-branch, which return the branches of a mobile, and branch-length and branch-structure, which return the components of a branch.
+Using your selectors, define a procedure total-weight that returns the total weight of a mobile.
+A mobile is said to be balanced if the torque applied by its top-left branch is equal to that applied by its top-right branch (that is, if the length of the left rod multiplied by the weight hanging from that rod is equal to the corresponding product for the right side) and if each of the submobiles hanging off its branches is balanced. Design a predicate that tests whether a binary mobile is balanced.
+|#
+
+(define (make-mobile left right)
+  (list left right))
+(define (make-branch length structure)
+  (list length structure))
+(define (left-branch mobile)
+  (car mobile))
+(define (right-branch mobile)
+  (cdr mobile))
+(define (branch-weight branch)
+  (if (list? (cdr branch))
+      (total-weight (cdr branch))
+      (cdr branch)))
+(define (total-weight mobile)
+  (+ (branch-weight (left-branch mobile))
+     (branch-weight (right-branch mobile))))
+(define (balanced mobile)
+  (let ((l (left-branch mobile))
+	(r (right-branch mobile)))
+    (and (or (not (list? (cdr l)))
+	     (balenced (car l)))
+	 (or (not (list? (cdr r)))
+	     (balenced (car r)))
+	 (= (* (car l) (branch-weight l))
+	    (* (car r) (branch-weight r))))))
+
+
+;test
+(define lb (make-branch 2 3))
+(define rb (make-branch 3 2))
+(define mob (make-mobile lb rb))
+
+(newline)
+(display (total-weight mob))
+(newline)
+(display (balanced mob))
