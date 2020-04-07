@@ -1,0 +1,23 @@
+#|
+(load "Desktop/scheme_script/Chapter_3/2.scm")
+
+|#
+
+(define (make-monitor f)
+  (let ((num_calls 0))
+    (define (run param)
+      (begin (set! num_calls (+ num_calls 1))
+	     (f param)))
+    (define (dispatch m)
+      (if (eq? 'how-many-calls?)
+	  num_calls
+	  (run m)))
+    dispatch))
+
+(newline)
+(define s (make-monitor sqrt))
+(newline)
+(s 100)
+(newline)
+(s 'how-many-calls?)
+	    

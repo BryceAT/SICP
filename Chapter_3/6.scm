@@ -1,0 +1,66 @@
+#|
+(load "Desktop/scheme_script/Chapter_3/6.scm")
+make a random number generator
+
+middle square plus key called
+Middle Square Weyl Sequence PRNG
+|#
+
+
+
+
+;integer 32 digits
+
+(define rand16
+  (let ((key 0) ;32 digit int
+	(cur 0) ;
+	(seq 0)
+	(trial 0))
+    (define (new_val num); why is num here?
+      (begin
+	(set! cur (* cur cur))
+        (set! seq (+ seq key))
+        (set! cur (+ cur seq))
+        (set! cur (quotient (remainder cur 1000000000000000000000000)
+	  		    100000000))
+        (set! trial (+ trial 1))
+        (/ cur 10000000000000000.0)))
+    (define (dispatch m)
+      (cond ((eq? m 'generate) (new_val 0))
+	    ((eq? m 'reset) (begin (set! trial 0)
+				   (lambda (x) (set! key x))))
+	    ((eq? m 'trial) trial)
+	    ((eq? m 'key) key)
+	    ((eq? m 'seq) seq)
+	    (else (error "maybe you mean generate"))))
+    dispatch))
+
+(newline)
+(define rand rand16)
+((rand 'reset) 12345678912345678912345678912345)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+(newline)
+(display (rand 'generate))
+
